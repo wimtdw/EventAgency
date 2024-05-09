@@ -4,6 +4,9 @@
   <title>Вход</title>
 </head>
 <body>
+<div th:if="${error}">
+  <p>Ошибка входа (неправильное имя пользователя или пароль)</p>
+</div>
 <h1>Форма входа</h1>
 <form th:action="@{/login}" method="post">
   <label for="username">Имя пользователя:</label>
