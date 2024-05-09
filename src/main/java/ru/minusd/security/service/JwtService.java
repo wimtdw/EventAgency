@@ -2,6 +2,7 @@ package ru.minusd.security.service;
 
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -9,6 +10,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import ru.minusd.security.JwtException;
 import ru.minusd.security.domain.model.User;
 
 import java.security.Key;
@@ -83,7 +85,7 @@ public class JwtService {
     private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 100000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 30))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
 
@@ -113,11 +115,19 @@ public class JwtService {
      * @param token токен
      * @return данные
      */
-    private Claims extractAllClaims(String token) {
+    /*private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
                 .getBody();
+    }*/
+    private Claims extractAllClaims(String token) {
+        try {
+            return Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
+        } catch (ExpiredJwtException e) {
+            throw new JwtException("Token expired", e);
+        } catch (JwtException e) {
+            throw new JwtException("Token invalid", e);
+        }
     }
-
     /**
      * Получение ключа для подписи токена
      *
