@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Форма запроса</title>
+</head>
+<body>
+<form th:action="@{/query}" method="post">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" name="name" required />
+    <label for="text">Текст запроса:</label>
+    <input type="text" id="text" name="text" required/>
+    <button type="submit">Отправить</button>
+</form>
+</body>
+</html>

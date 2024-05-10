@@ -10,9 +10,10 @@
 
 <p><a href="/login">Войти</a></p>
 <p><a href="/register">Зарегистрироваться</a></p>
+<p><a href="/personal">Личный кабинет</a></p>
 <form sec:authorize="isFullyAuthenticated()" th:action="@{/logout_m}" method="get">
     <h3><input type="submit" value="Выйти" /></h3>
 </form>
-
+<a th:href="@{/query}"><h2>Отправить заявку</h2></a>
 </body>
 </html>

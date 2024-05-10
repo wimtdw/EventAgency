@@ -92,5 +92,7 @@ public class AuthController {
     public String test(){
         return "test";
     }
+
+
 }
 
