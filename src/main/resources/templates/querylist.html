@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Мои заявки</title>
+    <title>My queries</title>
 </head>
 <body>
-<h1>Запросы</h1>
+<h1>Заявки</h1>
 <div th:if="${not #lists.isEmpty(queries)}">
     <table>
         <thead th:unless="${#lists.isEmpty(queries)}">
@@ -12,6 +12,8 @@
             <th>Вы представились как:</th>
             <th>Ваш Email</th>
             <th>Текст заявки</th>
+            <th>Дата</th>
+            <th>Статус заявки</th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +21,8 @@
             <td th:text="${query.name}">Имя</td>
             <td th:text="${query.email}">Email</td>
             <td th:text="${query.text}">Текст</td>
+            <td th:text="${query.date}">Дата отправки</td>
+            <td th:text="${query.status}">Статус</td>
         </tr>
         </tbody>
     </table>

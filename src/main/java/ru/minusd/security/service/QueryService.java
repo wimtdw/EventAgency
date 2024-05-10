@@ -15,7 +15,9 @@ import ru.minusd.security.domain.model.User;
 import ru.minusd.security.repository.QueryRepository;
 import ru.minusd.security.repository.UserRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,6 +40,8 @@ public class QueryService {
                 .name(request.getName())
                 .text(request.getText())
                 .user(user_cur)
+                .status("В обработке")
+                .date(new SimpleDateFormat("dd-MM-yyyy").format(new Date()))
                 .build();
 
         create(query);
@@ -49,7 +53,9 @@ public class QueryService {
             QueryDTO dto = new QueryDTO();
             dto.setName(query.getName());
             dto.setText(query.getText());
-            dto.setEmail(query.getUser().getEmail()); // Предполагается, что в классе User есть поле email
+            dto.setEmail(query.getUser().getEmail());
+            dto.setDate(query.getDate());
+            dto.setStatus(query.getStatus());
             dtos.add(dto);
         }
         return dtos;

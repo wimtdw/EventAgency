@@ -2,6 +2,8 @@ package ru.minusd.security.domain.dto;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,6 +13,8 @@ public class QueryDTO {
     private String name;
     private String text;
     private String email;
+    private String date;
+    private String status;
 
     // Конструкторы, геттеры и сеттеры
     // ...

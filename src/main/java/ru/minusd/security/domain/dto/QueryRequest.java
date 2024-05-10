@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +21,15 @@ public class QueryRequest {
     @NotBlank(message = "Имя пользователя не может быть пустыми")
     private String name;
 
+    @Schema(description = "Дата", example = "")
+    @Size(min = 5, max = 50, message = "Дата")
+    @NotBlank(message = "")
+    private String date;
+
+    @Schema(description = "Статус", example = "")
+    @Size(min = 5, max = 50, message = "Статус")
+    @NotBlank(message = "")
+    private String status;
 
     @Schema(description = "Текст", example = "my_1secret1_password")
     @Size(max = 11255, message = "Длина пароля должна быть не более 255 символов")
