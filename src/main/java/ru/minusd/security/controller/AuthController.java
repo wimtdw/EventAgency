@@ -103,20 +103,20 @@ public class AuthController {
         return "test";
     }
 
-    @GetMapping("/admin")
+    /*@GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public String getQueries(Model model) {
         List<QueryDTO> queries = queryService.getAllQueries();
         model.addAttribute("queries", queries);
         return "admin";
-    }
-    @PostMapping("/updatestatus")
+    }*/
+    /*@PostMapping("/updatestatus")
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public String updateQueryStatus(@RequestParam("id") Long id, @RequestParam("status") String status) {
         // Проверьте, что id и статус не пустые и что пользователь имеет право на изменение статуса
         queryService.updateStatus(id, status);
         return "redirect:/admin"; // Перенаправление на страницу со списком запросов после обновления
-    }
+    }*/
 }
 

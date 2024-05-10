@@ -1,52 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
-    <title>All queries</title>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
 </head>
 <body>
-<h1>Все заявки от пользователей</h1>
-<div th:if="${not #lists.isEmpty(queries)}">
-    <table>
-        <thead th:unless="${#lists.isEmpty(queries)}">
-        <tr>
-            <th>Id</th>
-            <th>Имя</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Текст заявки</th>
-            <th>Дата отправки</th>
-            <th>Статус заявки</th>
-            <th>Действия</th> <!-- Изменено на "Действия" -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="query : ${queries}">
-            <td th:text="${query.id}">Id</td>
-            <td th:text="${query.name}">Имя</td>
-            <td th:text="${query.username}">Имя пользователя</td>
-            <td th:text="${query.email}">Email</td>
-            <td th:text="${query.text}">Текст</td>
-            <td th:text="${query.date}">Дата отправки</td>
-            <td th:text="${query.status}">Статус</td>
-            <td> <!-- Добавлена новая ячейка для формы -->
-                <form th:action="@{/updatestatus}" method="post">
-                    <input type="hidden" th:name="id" th:value="${query.id}" />
-                    <select th:name="status">
-                        <option value="В обработке" th:selected="${query.status == 'В обработке'}">В обработке</option>
-                        <option value="Обработана" th:selected="${query.status == 'Обработана'}">Обработана</option>
-                    </select>
-                    <button type="submit">Обновить</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<h1>Панель управления</h1>
+<p><a href="/">На главную</a></p>
+<a th:href="@{/admin/allqueries}"><h3>Все заявки</h3></a>
+<a th:href="@{/admin/allusers}"><h3>Все пользователи</h3></a>
 
 
-<div th:if="${#lists.isEmpty(queries)}">
-    <p>Заявки не найдены.</p>
-</div>
-<a th:href="@{/}"><p>На главную</p></a>
 </body>
 </html>

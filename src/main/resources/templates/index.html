@@ -14,6 +14,8 @@
 <form sec:authorize="isFullyAuthenticated()" th:action="@{/logout_m}" method="get">
     <h3><input type="submit" value="Выйти" /></h3>
 </form>
+<br>
+<a th:href="@{/admin}"><h3>Панель админа</h3></a>
 <!--<a th:href="@{/query}"><h2>Отправить заявку</h2></a>-->
 </body>
 </html>

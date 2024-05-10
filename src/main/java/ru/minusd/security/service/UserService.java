@@ -1,13 +1,20 @@
 package ru.minusd.security.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import ru.minusd.security.domain.dto.QueryDTO;
+import ru.minusd.security.domain.dto.UserDTO;
+import ru.minusd.security.domain.model.Query;
 import ru.minusd.security.domain.model.Role;
 import ru.minusd.security.domain.model.User;
 import ru.minusd.security.repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -86,5 +93,34 @@ public class UserService {
         var user = getCurrentUser();
         user.setRole(Role.ROLE_ADMIN);
         save(user);
+    }
+//
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public void deleteUser(Long id){
+//        User currentUser = getCurrentUser();
+//        // Проверяем, не является ли удаляемый пользователь текущим пользователем
+//        if (currentUser.getId().equals(id)) {
+//            try {
+//                throw new Exception("Нельзя удалить текущего пользователя");
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//        // Удаление пользователя, если он не является текущим
+//        repository.deleteById(id);
+//    }
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<UserDTO> getAllUsers() {
+        List<User> users = repository.findAll();
+        List<UserDTO> dtos = new ArrayList<>();
+        for (User user : users) {
+            UserDTO dto = new UserDTO();
+            dto.setId(user.getId());
+            dto.setUsername(user.getUsername());
+            dto.setEmail(user.getEmail());
+            dto.setRole(String.valueOf(user.getRole()));
+            dtos.add(dto);
+        }
+        return dtos;
     }
 }
