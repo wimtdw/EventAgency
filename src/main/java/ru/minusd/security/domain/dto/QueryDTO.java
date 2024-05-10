@@ -10,7 +10,9 @@ import java.util.Date;
 @Getter
 @Setter
 public class QueryDTO {
+    private Long id;
     private String name;
+    private String username;
     private String text;
     private String email;
     private String date;

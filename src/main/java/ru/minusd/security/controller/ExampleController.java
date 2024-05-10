@@ -16,12 +16,6 @@ import ru.minusd.security.service.UserService;
 public class ExampleController {
     private final UserService service;
 
-    @GetMapping
-    @Operation(summary = "Доступен только авторизованным пользователям")
-    public String example() {
-        return "Hello, world!";
-    }
-
     @GetMapping("/admin")
     @Operation(summary = "Доступен только авторизованным пользователям с ролью ADMIN")
     @PreAuthorize("hasRole('ADMIN')")

@@ -1,6 +1,7 @@
 package ru.minusd.security.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,6 +26,7 @@ import java.util.List;
 public class QueryService {
     private final QueryRepository repository;
     private final UserService userService;
+
     public Query save(Query query) {
         return repository.save(query);
     }
@@ -32,7 +34,6 @@ public class QueryService {
     public Query create(Query query) {
         return save(query);
     }
-
 
     public void createQuery(QueryRequest request) {
         User user_cur = userService.getCurrentUser();
@@ -52,6 +53,31 @@ public class QueryService {
         for (Query query : queries) {
             QueryDTO dto = new QueryDTO();
             dto.setName(query.getName());
+            dto.setUsername(query.getUser().getUsername());
+            dto.setId(query.getId());
+            dto.setText(query.getText());
+            dto.setEmail(query.getUser().getEmail());
+            dto.setDate(query.getDate());
+            dto.setStatus(query.getStatus());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    public void updateStatus(Long id, String status){
+        Query query = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Неверный ID запроса"));
+        query.setStatus(status);
+        repository.save(query);
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<QueryDTO> getAllQueries() {
+        List<Query> queries = repository.findAll();
+        List<QueryDTO> dtos = new ArrayList<>();
+        for (Query query : queries) {
+            QueryDTO dto = new QueryDTO();
+            dto.setName(query.getName());
+            dto.setUsername(query.getUser().getUsername());
+            dto.setId(query.getId());
             dto.setText(query.getText());
             dto.setEmail(query.getUser().getEmail());
             dto.setDate(query.getDate());

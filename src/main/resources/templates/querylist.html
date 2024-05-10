@@ -10,6 +10,7 @@
         <thead th:unless="${#lists.isEmpty(queries)}">
         <tr>
             <th>Вы представились как:</th>
+            <th>Ваш Username</th>
             <th>Ваш Email</th>
             <th>Текст заявки</th>
             <th>Дата</th>
@@ -19,6 +20,7 @@
         <tbody>
         <tr th:each="query : ${queries}">
             <td th:text="${query.name}">Имя</td>
+            <td th:text="${query.username}">Имя пользователя</td>
             <td th:text="${query.email}">Email</td>
             <td th:text="${query.text}">Текст</td>
             <td th:text="${query.date}">Дата отправки</td>
@@ -30,7 +32,7 @@
 
 
 <div th:if="${#lists.isEmpty(queries)}">
-    <p>Запросы не найдены.</p>
+    <p>Заявки не найдены.</p>
 </div>
 <a th:href="@{/personal}"><p>Назад в личный кабинет</p></a>
 </body>
