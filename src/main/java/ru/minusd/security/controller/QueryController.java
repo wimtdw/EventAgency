@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.minusd.security.domain.dto.JwtAuthenticationResponse;
@@ -17,7 +18,17 @@ import ru.minusd.security.service.QueryService;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/personal")
 public class QueryController {
+    @GetMapping
+    public String personalPage(){
+        return "personal";
+    }
+    @GetMapping("/myqueries")
+    public String queryShow(){
+        return "querylist";
+    }
+
     private final QueryService queryService;
     @GetMapping("/query")
     public String queryForm() {

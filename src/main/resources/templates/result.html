@@ -7,7 +7,9 @@
 <div th:if="${error}">
     <p>Ошибка</p>
 </div>
+<p>Заявка отправлена!</p>
 <p th:text="'Имя: ' + ${query.name}"></p>
 <p th:text="'Запрос: ' + ${query.text}"></p>
+<a th:href="@{/personal}"><p>Назад в личный кабинет</p></a>
 </body>
 </html>

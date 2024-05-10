@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Agency Personal</title>
+</head>
+<body>
+<h1>Личный кабинет</h1>
+<p><a href="/">На главную</a></p>
+<a th:href="@{/personal/query}"><h3>Оставить заявку на проведение вашего мероприятия</h3></a>
+<a th:href="@{/personal/myqueries}"><h3>Мои заявки</h3></a>
+<form sec:authorize="isFullyAuthenticated()" th:action="@{/logout_m}" method="get">
+    <h3><input type="submit" value="Выйти" /></h3>
+</form>
+
+</body>
+</html>
