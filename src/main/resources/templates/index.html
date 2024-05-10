@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Event Agency Home</title>
 </head>
 <body>
 <h1>Welcome to Our Event Agency!</h1>
-<!-- Add your content here -->
+
+<p><a href="/login">Войти</a></p>
+<p><a href="/register">Зарегистрироваться</a></p>
+<form sec:authorize="isFullyAuthenticated()" th:action="@{/logout_m}" method="get">
+    <h3><input type="submit" value="Выйти" /></h3>
+</form>
+
 </body>
 </html>
