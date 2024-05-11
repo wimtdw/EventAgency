@@ -26,10 +26,7 @@ public class QueryController {
     public String personalPage(){
         return "personal";
     }
-   /* @GetMapping("/myqueries")
-    public String queryShow(){
-        return "querylist";
-    }*/
+
    @GetMapping("/myqueries")
    public String getQueries(Model model) {
        User user = userService.getCurrentUser();
@@ -45,10 +42,6 @@ public class QueryController {
     }
 
 
-    /*public String querySubmit(@ModelAttribute Query query, Model model) {
-        model.addAttribute("query", query);
-        return "result";
-    }*/
     @PostMapping("/query")
     public String queryCreate(@ModelAttribute QueryRequest queryRequest, @ModelAttribute Query query, Model model, RedirectAttributes redirectAttributes ) {
         try {

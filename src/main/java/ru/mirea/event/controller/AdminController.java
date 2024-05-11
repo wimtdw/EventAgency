@@ -54,13 +54,7 @@ public class AdminController {
         model.addAttribute("users", users);
         return "allusers";
     }
-    /*@PostMapping("/deleteuser")
-    @PreAuthorize("hasRole('ADMIN')")
-    @Transactional
-    public String deleteUser(@RequestParam("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/admin/allusers"; // Перенаправление на страницу со списком запросов после обновления
-    }*/
+
     private final ItemService itemService;
     @GetMapping("/add")
     public String itemForm() {

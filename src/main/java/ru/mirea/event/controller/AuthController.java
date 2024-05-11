@@ -55,11 +55,7 @@ public class AuthController {
         return "login";
     }
 
-    /*@Operation(summary = "Авторизация пользователя")
-    @PostMapping("/login")
-    public JwtAuthenticationResponse signIn(@ModelAttribute SignInRequest request) {
-        return authenticationService.signIn(request);
-    }*/
+
     @PostMapping("/login")
     public RedirectView signIn(@ModelAttribute SignInRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         try {
@@ -89,34 +85,14 @@ public class AuthController {
         response.addCookie(jwtCookie);
         return "redirect:/test";
     }
-//        return "redirect:/logout";
-        // Перенаправление на страницу входа
-        /*try {
-            response.sendRedirect("/login");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+
 
     @GetMapping("/test")
     public String test(){
         return "test";
     }
 
-    /*@GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String getQueries(Model model) {
-        List<QueryDTO> queries = queryService.getAllQueries();
-        model.addAttribute("queries", queries);
-        return "admin";
-    }*/
-    /*@PostMapping("/updatestatus")
-    @PreAuthorize("hasRole('ADMIN')")
-    @Transactional
-    public String updateQueryStatus(@RequestParam("id") Long id, @RequestParam("status") String status) {
-        // Проверьте, что id и статус не пустые и что пользователь имеет право на изменение статуса
-        queryService.updateStatus(id, status);
-        return "redirect:/admin"; // Перенаправление на страницу со списком запросов после обновления
-    }*/
+
     @GetMapping("/")
     public String showItems(Model model){
         List<ItemDTO> items = itemService.getAllItems();

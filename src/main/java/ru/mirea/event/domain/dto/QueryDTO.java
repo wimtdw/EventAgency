@@ -16,6 +16,4 @@ public class QueryDTO {
     private String date;
     private String status;
 
-    // Конструкторы, геттеры и сеттеры
-    // ...
 }
