@@ -4,6 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Event Agency Home</title>
+    <!--<style>
+        .container {
+            display: flex;
+            flex-wrap: nowrap; /* Если вы хотите, чтобы все карточки оставались в одной строке без переноса */
+            justify-content: space-around; /* Распределение пространства вокруг элементов */
+            align-items: center; /* Выравнивание элементов по центру по вертикали */
+        }
+        .card {
+            width: 30%;
+            flex: 0 0 auto; /* Карточки не будут растягиваться или сжиматься */
+            margin: 10px; /* Отступы вокруг карточек */
+            /* Дополнительные стили для карточек */
+        }
+    </style>-->
 </head>
 <body>
 <h1>Агентство по организации мероприятий</h1>
@@ -17,5 +31,21 @@
 <br>
 <a th:href="@{/admin}"><h3>Панель админа</h3></a>
 <!--<a th:href="@{/query}"><h2>Отправить заявку</h2></a>-->
+<br>
+<!--<p><a href="/items">Наши мероприятия</a></p>-->
+<h1>Наши мероприятия</h1>
+
+<div th:if="${not #lists.isEmpty(items)}" class="container">
+    <div th:each="item : ${items}" class="card">
+        <div class="card-body">
+            <h3 class="card-title" th:text="${item.name}">Название</h3>
+            <p class="card-text" th:text="${item.text}">Описание</p>
+        </div>
+        <img th:src="${item.image}" class="card-img-top" alt="Image">
+    </div>
+</div>
+<div th:if="${#lists.isEmpty(items)}">
+    <p>Мероприятия не найдены.</p>
+</div>
 </body>
 </html>

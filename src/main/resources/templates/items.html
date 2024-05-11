@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+</head>
+<body>
+<h1>Наши мероприятия</h1>
+
+<a th:href="@{/}"><p>На главную</p></a>
+<br>
+<br>
+<div th:if="${not #lists.isEmpty(items)}" class="container">
+    <div th:each="item : ${items}" class="card">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${item.name}">Название</h5>
+            <p class="card-text" th:text="${item.text}">Описание</p>
+        </div>
+        <img th:src="${item.image}" class="card-img-top" alt="Image">
+    </div>
+</div>
+<div th:if="${#lists.isEmpty(items)}">
+    <p>Мероприятия не найдены.</p>
+</div>
+</body>
+</html>

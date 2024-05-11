@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Event</title>
+</head>
+<body>
+<h1>Создать мероприятие</h1>
+<form th:action="@{/admin/add}" method="post">
+    <label for="name">Название:</label>
+    <input type="text" id="name" name="name" required />
+    <label for="text">Описание:</label>
+    <input type="text" id="text" name="text" required/>
+    <label for="image">Адрес картинки:</label>
+    <input type="text" id="image" name="image" required/>
+    <button type="submit">Создать</button>
+</form>
+<br>
+<a th:href="@{/admin}"><p>На страницу админа</p></a>
+<a th:href="@{/}"><p>На главную</p></a>
+</body>
+</html>
